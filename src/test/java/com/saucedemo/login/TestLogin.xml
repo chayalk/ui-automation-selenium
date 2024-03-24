@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Login Test Suite">
+    <listeners>
+        <listener class-name="com.saucedemo.listeners.ExtentReportListener"/>
+    </listeners>
+    <test name="Login Test scenarios">
+        <classes>
+            <class name="com.saucedemo.login.TestLogin"/>
+        </classes>
+    </test>
+</suite>
