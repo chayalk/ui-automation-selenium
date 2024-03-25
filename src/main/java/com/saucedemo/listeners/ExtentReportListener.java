@@ -2,7 +2,9 @@ package com.saucedemo.listeners;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.saucedemo.framework.PageBase;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -11,10 +13,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Calendar;
-import java.util.Date;
 
-public class ExtentReportListener implements ITestListener {
+public class ExtentReportListener extends PageBase implements ITestListener {
 
     private static final String OUTPUT_FOLDER = "./build/";
     private static final String FILE_NAME = "TestExecutionReport.html";
@@ -66,10 +66,14 @@ public class ExtentReportListener implements ITestListener {
 
     public synchronized void onTestSuccess(ITestResult result) {
         test.get().pass("Test passed");
+        test.get().pass(MediaEntityBuilder.createScreenCaptureFromBase64String(takeScreenshot(),
+                    result.getMethod().getMethodName()).build());
     }
 
     public synchronized void onTestFailure(ITestResult result) {
         test.get().fail("Test failed");
+        test.get().fail(MediaEntityBuilder.createScreenCaptureFromBase64String(takeScreenshot(),
+                result.getMethod().getMethodName()).build());
     }
 
     public synchronized void onTestSkipped(ITestResult result) {
