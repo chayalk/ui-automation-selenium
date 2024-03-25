@@ -23,10 +23,11 @@ public class TestLogin extends TestBase {
     @Test(alwaysRun = true, description = "Test case:2 Verify login failure message with invalid credentials")
     public void testLoginWithInvalidCredentials() {
         String expectedValidationMessage = "Epic sadface: Username and password do not match any user in this service";
+        String invalidUsername = "invalidUser";
+        String invalidPassword = "invalidPassword";
 
         HomePage homePage = new HomePage();
-        ProductsPage productsPage = new ProductsPage();
-        homePage.login("invalid", "invalid");
+        homePage.login(invalidUsername, invalidPassword);
 
         Assert.assertEquals(homePage.loginFailValidationMsg(), expectedValidationMessage);
     }
