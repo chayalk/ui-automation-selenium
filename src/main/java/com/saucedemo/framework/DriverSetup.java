@@ -3,6 +3,7 @@ package com.saucedemo.framework;
 import com.saucedemo.utils.PropertyReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverSetup {
@@ -22,7 +23,9 @@ public class DriverSetup {
 
     public void startDriver() {
         if (PropertyReader.getProperty("browser.name").equalsIgnoreCase("chrome")) {
-            webDriver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless=new");
+            webDriver = new ChromeDriver(options);
         } else if (PropertyReader.getProperty("browser.name").equalsIgnoreCase("firefox")) {
             webDriver = new FirefoxDriver();
         } else {
